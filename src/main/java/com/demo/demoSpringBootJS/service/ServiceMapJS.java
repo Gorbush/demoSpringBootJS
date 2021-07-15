@@ -7,9 +7,11 @@ import java.util.List;
 public interface ServiceMapJS {
     /**
      * Создает новую запись с скриптом
-     * * @param scriptInfo - информация для создания скрипта
+     * @param scriptText Script text
+     * @return ScriptInfo object with information about script enqueued
      */
-    void create(ScriptInfo scriptInfo);
+    ScriptInfo create(String scriptText);
+
     /**
      * Возвращает список все ScriptInfo
      * @return список клиентов
@@ -41,19 +43,16 @@ public interface ServiceMapJS {
      */
     boolean updateStart(int id);
 
-
     /**
      * Обновляет ScriptInfo Date time_finished - дату время завершения выполения скрипта;
      * Обновляет status : 'complete' 2 or 'failed' 3,
      *    с заданным ID,
      * в соответствии с переданным
-     * @param id - id ScriptInfo которого нужно обновить
+     * @param scriptInfo - ScriptInfo которого нужно обновить
      * @return - true если данные были обновлены, иначе false
      */
 
-    boolean updateFinish(int id, String result);
-
-
+    boolean updateFinish(ScriptInfo scriptInfo, String result, ScriptInfo.ScriptStatus status);
 
     /**
      * Удаляет ScriptInfo с заданным ID
@@ -66,13 +65,13 @@ public interface ServiceMapJS {
      * Возвращает  ID ScriptInfo, которые нужно запустить
      * @return - List<Integer> с полученными ID
      */
-    List<Integer> getScheduler();
+    ScriptInfo fetchNextToRun();
 
 
     /**
      * Возвращает  Status script с заданным ID
      * @return - String Status
      */
-    String readStatus(int id);
+    ScriptInfo readStatus(int id);
 
 }

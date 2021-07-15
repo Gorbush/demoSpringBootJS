@@ -1,6 +1,7 @@
 package com.demo.demoSpringBootJS.model;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 public class ScriptInfo {
@@ -14,13 +15,21 @@ public class ScriptInfo {
 
    */
 
+    public enum ScriptStatus {
+        ENQUEUED,
+        RUNNING,
+        COMPLETE,
+        FAILED
+    }
+
 
     private Integer id; //autogeneration
     private String textScript;
-    private Integer statusId; // 'complete' 2,  'failed' 3,  'scheduled' 0,  'running' 1 from mapStatus
-    private Date time_added;
-    private Date time_started;
-    private Date time_finished;
+    private ScriptStatus status;
+    private Date timeAdded;
+    private Date timeStarted;
+    private Date timeFinished;
+    private String result;
 
     public String getTextScript() {
         return textScript;
@@ -30,8 +39,6 @@ public class ScriptInfo {
         this.textScript = textScript;
     }
 
-    private String result;
-
     public Integer getId() {
         return id;
     }
@@ -40,36 +47,36 @@ public class ScriptInfo {
         this.id = id;
     }
 
-    public Integer getStatusId() {
-        return statusId;
+    public ScriptStatus getStatus() {
+        return status;
     }
 
-    public void setStatusId(Integer statusId) {
-        this.statusId = statusId;
+    public void setStatus(ScriptStatus status) {
+        this.status = status;
     }
 
-    public Date getTime_added() {
-        return time_added;
+    public Date getTimeAdded() {
+        return timeAdded;
     }
 
-    public void setTime_added(Date time_added) {
-        this.time_added = time_added;
+    public void setTimeAdded(Date timeAdded) {
+        this.timeAdded = timeAdded;
     }
 
-    public Date getTime_started() {
-        return time_started;
+    public Date getTimeStarted() {
+        return timeStarted;
     }
 
-    public void setTime_started(Date time_started) {
-        this.time_started = time_started;
+    public void setTimeStarted(Date timeStarted) {
+        this.timeStarted = timeStarted;
     }
 
-    public Date getTime_finished() {
-        return time_finished;
+    public Date getTimeFinished() {
+        return timeFinished;
     }
 
-    public void setTime_finished(Date time_finished) {
-        this.time_finished = time_finished;
+    public void setTimeFinished(Date timeFinished) {
+        this.timeFinished = timeFinished;
     }
 
     public String getResult() {
@@ -85,12 +92,12 @@ public class ScriptInfo {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ScriptInfo that = (ScriptInfo) o;
-        return Objects.equals(id, that.id) && Objects.equals(textScript, that.textScript) && Objects.equals(statusId, that.statusId) && Objects.equals(time_added, that.time_added) && Objects.equals(time_started, that.time_started) && Objects.equals(time_finished, that.time_finished) && Objects.equals(result, that.result);
+        return Objects.equals(id, that.id) && Objects.equals(textScript, that.textScript) && Objects.equals(status, that.status) && Objects.equals(timeAdded, that.timeAdded) && Objects.equals(timeStarted, that.timeStarted) && Objects.equals(timeFinished, that.timeFinished) && Objects.equals(result, that.result);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, textScript, statusId, time_added, time_started, time_finished, result);
+        return Objects.hash(id, textScript, status, timeAdded, timeStarted, timeFinished, result);
     }
 
     @Override
@@ -98,10 +105,10 @@ public class ScriptInfo {
         return "ScriptInfo{" +
                 "id=" + id +
                 ", textScript='" + textScript + '\'' +
-                ", statusId=" + statusId +
-                ", time_added=" + time_added +
-                ", time_started=" + time_started +
-                ", time_finished=" + time_finished +
+                ", statusId=" + status +
+                ", time_added=" + timeAdded +
+                ", time_started=" + timeStarted +
+                ", time_finished=" + timeFinished +
                 ", result='" + result + '\'' +
                 '}';
     }
